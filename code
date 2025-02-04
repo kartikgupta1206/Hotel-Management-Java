@@ -1,0 +1,371 @@
+//Coding  For:
+//WELCOME TO RADISSON BLU;
+String u=jPasswordField1.getText();
+String p=jPasswordField2.getText();
+if (p.equals("2002") && u.equals("kartik"))
+   {	
+    JOptionPane.showMessageDialog(null, "You Are Successfully LogIn");
+   //create object
+   welcome welcome = new welcome();
+   new welcome().setVisible(true);
+    }
+    else
+    {
+    JOptionPane.showMessageDialog(null, "Incorrect UserName and Password");
+    }
+
+----------------------------------------------------------------------------------
+import javax.swing.JOptionPane;
+import java.sql.*;
+//Coding  For:
+//Addition:
+    //create object
+    addition addition=new addition();
+    new addition().setVisible(true);  
+    }                                        
+
+//Modify;
+    //create object
+    modify modify=new modify();
+    new modify().setVisible(true);     
+    }    
+
+//Delete;
+    //create object
+    delete delete=new delete();
+    new delete().setVisible(true);
+   }                                        
+//Cancel;
+   int a=JOptionPane.showConfirmDialog(this,"Are you sure you want to Exit");
+   if (a==0)
+  System.exit(0);
+   }                 
+
+-------------------------------------------------------------------------------------
+ 
+
+//Coding  For:
+//Calculate;
+int total,charges = 0;
+String rt = jComboBox1.getSelectedItem().toString();
+if (rt.equals("single"))
+ {
+ charges = 2000;
+ }
+ else if(rt.equals("double"))
+ {
+ charges = 2500;
+ }
+ else if(rt.equals("delux"))
+ {
+ charges = 3000;
+ }
+ jTextField6.setText(""+charges);
+ int nd;
+ nd=Integer.parseInt(jTextField5.getText());
+ total=charges*nd;
+jTextField7.setText(""+total);
+ }
+//Save;
+String name,rt;
+ int bo,po,ro,nd;
+ name=jTextField2.getText();
+ rt=jComboBox1.getSelectedItem().toString();
+ bo=Integer.parseInt(jTextField1.getText());
+ po=Integer.parseInt(jTextField3.getText());
+ ro=Integer.parseInt(jTextField4.getText());
+ nd=Integer.parseInt(jTextField5.getText());
+ try
+ {
+ Class.forName("java.sql.DriverManager");
+ Connection
+ con=DriverManager.getConnection("jdbc:mysql://localhost:3306/kartik","root","admin");
+ Statement stmt=(Statement)con.createStatement();
+ int total,charges = 0;
+ if (rt.equals("single"))
+ {
+charges = 2000;
+ }
+ if (rt.equals("double"))
+ {
+ charges = 2500;
+ }
+ if (rt.equals("delux"))
+ {
+ charges = 4000;
+ }
+ jTextField6.setText(""+charges);
+ total=charges*nd;
+ jTextField7.setText(""+total);
+String query="insert into project values('"+bo+"','"+name+"','"+po+"','"+ro+"','"+nd+"','"+charges+"','"+total+"','"+rt+"');";
+   int i=stmt.executeUpdate(query);
+   JOptionPane.showMessageDialog(null,"Saved Successfully");
+   stmt.close();
+   con.close();
+   }
+  catch(Exception e)
+   {
+   JOptionPane.showMessageDialog(this,e.getMessage());
+   }
+
+
+
+//New;
+            jTextField1.setText("");
+  jTextField2.setText("");
+  jTextField3.setText("");
+ jTextField4.setText("");
+ jTextField5.setText("");
+ jTextField6.setText("");
+ jTextField7.setText("");
+Back;
+new welcome().setVisible(true);
+
+--------------------------------------------------------------------------- 
+//Coding  For:
+//Search;
+int bo;
+ bo=Integer.parseInt(jTextField1.getText());
+ try
+ {
+ Class.forName("java.sql.DriverManager");
+ Connection
+con=(Connection)DriverManager.getConnection("jdbc:mysql://localhost:3306/kartik","root","admin");
+ Statement stmt=(Statement)con.createStatement();
+ String query="select * from project where bo="+bo+";";
+ ResultSet rs=stmt.executeQuery(query);
+ int found=0;
+ if(rs.next())
+ {
+ String name,rt;
+ name=rs.getString("name");
+ rt=rs.getString("rt");
+ jTextField2.setText(name);
+ jComboBox1.setSelectedItem(rt);
+ int po,ro,nd,charges,total;
+ bo=rs.getInt("bo");
+ po=rs.getInt("po");
+ ro=rs.getInt("ro");
+ nd=rs.getInt("nd");
+ charges=rs.getInt("charges");
+ total=rs.getInt("total");
+ jTextField3.setText(""+po);
+jTextField4.setText(""+ro);
+ jTextField5.setText(""+nd);
+ jTextField6.setText(""+charges);
+ jTextField7.setText(""+total);
+found++;
+JOptionPane.showMessageDialog(this,"Click OK to go to next Rcord");
+ }
+Else
+{
+ jTextField1.setText("");
+ jTextField2.setText("");
+ jTextField3.setText("");
+ jTextField4.setText("");
+jTextField5.setText("");
+ jTextField6.setText("");
+ jTextField7.setText("");
+JOptionPane.showMessageDialog(this,"No such record found");
+ }
+ }
+ catch(Exception e)
+ {
+ JOptionPane.showMessageDialog(this, e.getMessage());
+}
+//Delete;
+ int bo;
+ bo=Integer.parseInt(jTextField1.getText());
+ try
+ {
+ Class.forName("java.sql.DriverManager");
+ Connection
+con=DriverManager.getConnection("jdbc:mysql://localhost:3306/kartik","root","admin");
+ Statement stmt=con.createStatement();
+ {
+ String query="Delete from project where bo="+bo+";";
+ stmt.executeUpdate(query);
+JOptionPane.showMessageDialog(null,"Record Successfully Deleted");
+jTextField1.setText("");
+jTextField2.setText("");
+jTextField3.setText("");
+jTextField4.setText("");
+jTextField5.setText("");
+ jTextField6.setText("");
+ jTextField7.setText("");
+ }
+ }
+ //end of try
+ catch(Exception e)
+ {
+ JOptionPane.showMessageDialog(null, e);
+ }
+ }                                        
+//Back;
+new welcome().setVisible(true);     
+
+-------------------------------------------------------------------------------
+ 
+//Coding  For:
+//Search;
+ int bo;
+bo=Integer.parseInt(jTextField1.getText());
+ try
+ {
+Class.forName("java.sql.DriverManager");
+ Connection
+con=(Connection)DriverManager.getConnection("jdbc:mysql://localhost:3306/kartik","root","admin");
+Statement stmt=(Statement)con.createStatement();
+String query="select * from project where bo="+bo+";";
+ ResultSet rs=stmt.executeQuery(query);
+ int found=0;
+ if(rs.next())
+ {
+String name,rt;
+ name=rs.getString("name");
+rt=rs.getString("rt");
+ jTextField2.setText(name);
+ jComboBox1.setSelectedItem(rt);
+ int po,ro,nd,charges,total;
+ bo=rs.getInt("bo");
+ po=rs.getInt("po");
+ ro=rs.getInt("ro");
+nd=rs.getInt("nd");
+charges=rs.getInt("charges");
+total=rs.getInt("total");
+ jTextField3.setText(""+po);
+ jTextField4.setText(""+ro);
+ jTextField5.setText(""+nd);
+ jTextField6.setText(""+charges);
+ jTextField7.setText(""+total);
+found++;JOptionPane.showMessageDialog(this,"Click Ok to go to next Record");
+ }
+else
+{
+ jTextField1.setText("");
+jTextField2.setText("");
+jTextField3.setText("");
+ jTextField4.setText("");
+ jTextField5.setText("");
+ jTextField6.setText("");
+jTextField7.setText("");
+ JOptionPane.showMessageDialog(this,"No such record found");
+ }
+}
+ catch(Exception e)
+ {
+ JOptionPane.showMessageDialog(this, e.getMessage());
+ }
+//Update;
+try
+ {
+Class.forName("java.sql.DriverManager");
+ Connection
+ con=(Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/kartik","root","admin");
+ Statement stmt=(Statement)con.createStatement();
+String name,rt;
+int bo,po,ro,nd;
+ name=jTextField2.getText();
+ rt=jComboBox1.getSelectedItem().toString();
+ bo=Integer.parseInt(jTextField1.getText());
+ po=Integer.parseInt(jTextField3.getText());
+ro=Integer.parseInt(jTextField4.getText());
+ nd=Integer.parseInt(jTextField5.getText());
+ int total,charges = 0;
+if (rt.equals("single"))
+ {
+ charges = 2000;
+ }
+ else if (rt.equals("double"))
+ {
+ charges = 2500;
+ }
+else if (rt.equals("delux"))
+{
+ charges = 4000;
+}
+jTextField6.setText(""+charges);
+total=charges*nd;
+jTextField7.setText(""+total);
+{
+String query="update project set bo="+bo+",name='"+name+"',po="+po+",ro="+ro+",nd="+nd+",charges="+charges+",total="+total+",rt='"+rt+"'where bo="+bo+";";
+int i=stmt.executeUpdate(query);
+JOptionPane.showMessageDialog(null,i+"Successfully Updated");
+}
+}
+catch(Exception e)
+{
+JOptionPane.showMessageDialog(this,e.getMessage());
+ }
+//Back;
+new welcome().setVisible(true);
+
+-------------------------------------------------------------------------
+  
+import javax.swing.JOptionPane;
+import java.sql.*;
+//Coding  For:
+//Bill;
+ int bo;
+bo=Integer.parseInt(jTextField1.getText());
+ try
+ {
+Class.forName("java.sql.DriverManager");
+ Connection
+con=(Connection)DriverManager.getConnection("jdbc:mysql://localhost:3306/kartik","root","admin");
+Statement stmt=(Statement)con.createStatement();
+String query="select * from project where bo="+bo+";";
+ ResultSet rs=stmt.executeQuery(query);
+ int found=0;
+ if(rs.next())
+ {
+String name,rt;
+ name=rs.getString("name");
+rt=rs.getString("rt");
+ jTextField2.setText(name);
+ jComboBox1.setSelectedItem(rt);
+ int po,ro,nd,charges,total;
+ bo=rs.getInt("bo");
+ po=rs.getInt("po");
+ ro=rs.getInt("ro");
+nd=rs.getInt("nd");
+charges=rs.getInt("charges");
+total=rs.getInt("total");
+ jTextField3.setText(""+po);
+ jTextField4.setText(""+ro);
+ jTextField5.setText(""+nd);
+ jTextField6.setText(""+charges);
+ jTextField7.setText(""+total);
+found++;JOptionPane.showMessageDialog(this,"Click Ok to go to next Record");
+ }
+else
+{
+ jTextField1.setText("");
+jTextField2.setText("");
+jTextField3.setText("");
+ jTextField4.setText("");
+ jTextField5.setText("");
+ jTextField6.setText("");
+jTextField7.setText("");
+ JOptionPane.showMessageDialog(this,"No such record found");
+ }
+}
+ catch(Exception e)
+ {
+ JOptionPane.showMessageDialog(this, e.getMessage());
+ }
+//Back;
+new welcome().setVisible(true);
+//Clear;
+            jTextField1.setText("");
+  jTextField2.setText("");
+  jTextField3.setText("");
+ jTextField4.setText("");
+ jTextField5.setText("");
+ jTextField6.setText("");
+ jTextField7.setText("");
+
+**********************************************************************************
+
+
+
